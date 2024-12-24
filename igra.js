@@ -1,6 +1,6 @@
 import { update as updateZmija, draw as drawZmija, ZMIJA_SPEED, getZmijaHead, zmijaIntersection } from './zmija.js'
-import { update as updateFood, draw as drawFood } from './hrana.js'
-import { outsideGrid } from './grid.js'
+import { update as updateHrana, draw as drawHrana } from './hrana.js'
+import { outsideMreza } from './mreza.js'
 
 let lastRenderTime = 0
 let gameOver = false
