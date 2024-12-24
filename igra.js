@@ -41,5 +41,5 @@ function draw() {
 }
 
 function checkSmrt() {
-  gameOver = outsideGrid(getZmijaHead()) || zmijaIntersection()
+  gameOver = outsideMreza(getZmijaHead()) || zmijaIntersection()
 }

@@ -1,5 +1,5 @@
 let unosDirection = { x: 0, y: 0 }
-let lasUnosDirection = { x: 0, y: 0 }
+let lastUnosDirection = { x: 0, y: 0 }
 
 window.addEventListener('keydown', e => {
   switch (e.key) {
