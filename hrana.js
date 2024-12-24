@@ -1,24 +1,24 @@
 import { onSnake, expandSnake } from './snake.js'
 import { randomGridPosition } from './grid.js'
-let food = getRandomFoodPosition()
+let hrana = getRandomHranaPosition()
 const EXPANSION_RATE = 5
 export function update() {
-  if (onSnake(food)) {
+  if (onSnake(hrana)) {
     expandSnake(EXPANSION_RATE)
-    food = getRandomFoodPosition()
+    hrana = getRandomHranaPosition()
   }
 }
 export function draw(gameBoard) {
-  const foodElement = document.createElement('div')
-  foodElement.style.gridRowStart = food.y
-  foodElement.style.gridColumnStart = food.x
-  foodElement.classList.add('food')
-  gameBoard.appendChild(foodElement)
+  const hranaElement = document.createElement('div')
+  hranaElement.style.gridRowStart = hrana.y
+  hranaElement.style.gridColumnStart = hrana.x
+  hranaElement.classList.add('hrana')
+  gameBoard.appendChild(hranaElement)
 }
-function getRandomFoodPosition() {
-  let newFoodPosition
-  while (newFoodPosition == null || onSnake(newFoodPosition)) {
-    newFoodPosition = randomGridPosition()
+function getRandomHranaPosition() {
+  let newHranaPosition
+  while (newHranaPosition == null || onSnake(newHranaPosition)) {
+    newHranaPosition = randomGridPosition()
   }
-  return newFoodPosition
+  return newHranaPosition
 }
