@@ -1,18 +1,17 @@
-const MREZA_SIZE = 21
+const GRID_SIZE = 21
 
-export function randomMrezaPosition() {
+export function randomGridPosition() {
   return {
-    x: Math.floor(Math.random() * MREZA_SIZE) + 1,
-    y: Math.floor(Math.random() * MREZA_SIZE) + 1,
+    x: Math.floor(Math.random() * GRID_SIZE) + 1,
+    y: Math.floor(Math.random() * GRID_SIZE) + 1
   }
 }
 
-export function outsideMreza(position) {
+export function outsideGrid(position) {
   return (
-    position.x < 1 || position.x > MREZA_SIZE ||
-    position.y < 1 || position.y > MREZA_SIZE 
-
-    )
+    position.x < 1 || position.x > GRID_SIZE ||
+    position.y < 1 || position.y > GRID_SIZE
+  )
 }
 
     
