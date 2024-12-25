@@ -1,48 +1,42 @@
-import { getUnosDirection } from "./unos.js"
-
-export const ZMIJA_SPEED = 5
-const zmijaBody = [{ x: 11, y: 11 }]
-let newSegments = 0
-
 export function update() {
   addSegments()
 
-  const unosDirection = getUnosDirection()
-  for (let i = zmijaBody.length - 2; i >= 0; i--) {
-    zmijaBody[i + 1] = { ...zmijaBody[i] }
+  const inputDirection = getInputDirection()
+  for (let i = snakeBody.length - 2; i >= 0; i--) {
+    snakeBody[i + 1] = { ...snakeBody[i] }
   }
 
-  zmijaBody[0].x += unosDirection.x
-  zmijaBody[0].y += unosDirection.y
+  snakeBody[0].x += inputDirection.x
+  snakeBody[0].y += inputDirection.y
 }
 
 export function draw(gameBoard) {
-  zmijaBody.forEach(segment => {
-    const zmijaElement = document.createElement('div')
-    zmijaElement.style.gridRowStart = segment.y
-    zmijaElement.style.gridColumnStart = segment.x
-    zmijaElement.classList.add('zmija')
-    gameBoard.appendChild(zmijaElement)
+  snakeBody.forEach(segment => {
+    const snakeElement = document.createElement('div')
+    snakeElement.style.gridRowStart = segment.y
+    snakeElement.style.gridColumnStart = segment.x
+    snakeElement.classList.add('snake')
+    gameBoard.appendChild(snakeElement)
   })
 }
 
-export function expandZmija(amount) {
+export function expandSnake(amount) {
   newSegments += amount
 }
 
-export function onZmija(position, { ignoreHead = false } = {}) {
-  return zmijaBody.some((segment, index) => {
+export function onSnake(position, { ignoreHead = false } = {}) {
+  return snakeBody.some((segment, index) => {
     if (ignoreHead && index === 0) return false
     return equalPositions(segment, position)
   })
 }
 
-export function getZmijaHead() {
-  return zmijaBody[0]
+export function getSnakeHead() {
+  return snakeBody[0]
 }
 
-export function zmijaIntersection() {
-  return onZmija(zmijaBody[0], { ignoreHead: true })
+export function snakeIntersection() {
+  return onSnake(snakeBody[0], { ignoreHead: true })
 }
 
 function equalPositions(pos1, pos2) {
@@ -51,7 +45,7 @@ function equalPositions(pos1, pos2) {
 
 function addSegments() {
   for (let i = 0; i < newSegments; i++) {
-    zmijaBody.push({ ...zmijaBody[zmijaBody.length - 1] })
+    snakeBody.push({ ...snakeBody[snakeBody.length - 1] })
   }
 
   newSegments = 0
