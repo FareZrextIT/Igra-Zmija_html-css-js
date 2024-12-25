@@ -1,6 +1,6 @@
-import { update as updateZmija, draw as drawZmija, ZMIJA_SPEED, getZmijaHead, zmijaIntersection } from './zmija.js'
-import { update as updateHrana, draw as drawHrana } from './hrana.js'
-import { outsideMreza } from './mreza.js'
+import { update as updateSnake, draw as drawSnake, SNAKE_SPEED, getSnakeHead, snakeIntersection } from './zmija.js'
+import { update as updateFood, draw as drawFood } from './hrana.js'
+import { outsideGrid } from './mreza.js'
 
 let lastRenderTime = 0
 let gameOver = false
@@ -8,7 +8,7 @@ const gameBoard = document.getElementById('game-board')
 
 function main(currentTime) {
   if (gameOver) {
-    if (confirm('Izgubio/la si. Pritisni ok da restartas')) {
+    if (confirm('You lost. Press ok to restart.')) {
       window.location = '/'
     }
     return
@@ -17,7 +17,7 @@ function main(currentTime) {
 
   window.requestAnimationFrame(main)
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000
-  if (secondsSinceLastRender < 1 / ZMIJA_SPEED) return
+  if (secondsSinceLastRender < 1 / SNAKE_SPEED) return
 
 
   lastRenderTime = currentTime
@@ -29,17 +29,17 @@ function main(currentTime) {
 window.requestAnimationFrame(main)
 
 function update() {
-  updateZmija()
-  updateHrana()
-  checkSmrt()
+  updateSnake()
+  updateFood()
+  checkDeath()
 }
 
 function draw() {
   gameBoard.innerHTML = ''
-  drawZmija(gameBoard)
-  drawHrana(gameBoard)
+  drawSnake(gameBoard)
+  drawFood(gameBoard)
 }
 
-function checkSmrt() {
-  gameOver = outsideMreza(getZmijaHead()) || zmijaIntersection()
+function checkDeath() {
+  gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
 }
