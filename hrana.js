@@ -1,24 +1,28 @@
-import { onZmija, expandZmija } from './zmija.js'
-import { randomMrezaPosition } from './mreza.js'
-let hrana = getRandomHranaPosition()
+import { onSnake, expandSnake } from './zmija.js'
+import { randomGridPosition } from './mreza.js'
+
+let food = getRandomFoodPosition()
 const EXPANSION_RATE = 5
+
 export function update() {
-  if (onZmija(hrana)) {
-    expandZmija(EXPANSION_RATE)
-    hrana = getRandomHranaPosition()
+  if (onSnake(food)) {
+    expandSnake(EXPANSION_RATE)
+    food = getRandomFoodPosition()
   }
 }
+
 export function draw(gameBoard) {
-  const hranaElement = document.createElement('div')
-  hranaElement.style.mrezaRowStart = hrana.y
-  hranaElement.style.mrezaColumnStart = hrana.x
-  hranaElement.classList.add('hrana')
-  gameBoard.appendChild(hranaElement)
+  const foodElement = document.createElement('div')
+  foodElement.style.gridRowStart = food.y
+  foodElement.style.gridColumnStart = food.x
+  foodElement.classList.add('food')
+  gameBoard.appendChild(foodElement)
 }
-function getRandomHranaPosition() {
-  let newHranaPosition
-  while (newHranaPosition == null || onZmija(newHranaPosition)) {
-    newHranaPosition = randomMrezaPosition()
+
+function getRandomFoodPosition() {
+  let newFoodPosition
+  while (newFoodPosition == null || onSnake(newFoodPosition)) {
+    newFoodPosition = randomGridPosition()
   }
-  return newHranaPosition
+  return newFoodPosition
 }
